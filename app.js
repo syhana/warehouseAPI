@@ -13,9 +13,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
+
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204
+}
+
+app.use(cors(corsOptions));
 
 app.use('/', server.admin)
+app.use('/', server.barang)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
