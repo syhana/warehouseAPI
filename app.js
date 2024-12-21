@@ -16,6 +16,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/', server.admin)
+app.use('/', server.statusBarang)
+app.use ('/', server.kapasitasGudang)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
