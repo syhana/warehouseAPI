@@ -1,12 +1,15 @@
-const admin = require('./admin/admin')
-const barang = require('./admin/barang')
-const stok = require('./admin/stok')
-const riwayat = require('./barang/barang')
-const server = {}
+const admin = require("./admin/admin");
+const barang = require("./admin/barang");
+const stok = require("./admin/stok");
+const riwayat = require("./barang/barang");
+const kategori = require("./kategori/kategori");
 
-server.admin = admin
-server.barang = barang
-server.stok = stok
-server.riwayat = riwayat
+const server = {};
 
-module.exports = server
+server.admin = admin;
+server.barang = barang;
+server.stok = stok;
+server.riwayat = riwayat;
+server.kategori = kategori;
+
+module.exports = server;
