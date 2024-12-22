@@ -1,17 +1,23 @@
-const {Sequelize} = require('sequelize')
-require('dotenv').config()
+const { Sequelize } = require("sequelize");
+require("dotenv").config();
 
-const db = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+const db = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
     host: process.env.DB_HOST,
-    dialect: 'mysql',
-    timezone: '+07:00'
-})
+    port: process.env.DB_PORT,
+    dialect: "mysql",
+    timezone: "+07:00",
+  }
+);
 
 try {
-    db.authenticate();
-    console.log('Koneksi database berhasil.');
+  db.authenticate();
+  console.log("Koneksi database berhasil.");
 } catch (error) {
-    console.error('Koneksi database tidak berhasil : ', error);
+  console.error("Koneksi database tidak berhasil : ", error);
 }
 
 module.exports = db;
