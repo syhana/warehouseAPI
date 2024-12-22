@@ -27,6 +27,7 @@ app.use('/', server.admin)
 app.use('/', server.barang)
 app.use('/', server.stok)
 app.use('/', server.riwayat)
+app.use("/", server.kategori);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

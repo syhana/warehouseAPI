@@ -1,11 +1,10 @@
 // routes/Kategori/kategori.js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const kategoriController = require('../../controllers/kategori/kategori');
+const kategoriController = require("../../controllers/kategori/kategori");
 
-// Contoh endpoint
-router.get('/', kategoriController.getAllKategori);
-router.post('/', kategoriController.createKategori);
-router.put('/:id', kategoriController.updateKategori);
+router.get("/kategori", kategoriController.getAllKategori);
+router.post("/tambahKategori", kategoriController.createKategori);
+router.put("/editKategori/:id", kategoriController.updateKategori);
 
-module.exports = router; // Ini harus ada!
+module.exports = router; 
