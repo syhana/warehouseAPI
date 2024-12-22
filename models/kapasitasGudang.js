@@ -36,7 +36,7 @@ const KapasitasGudang = sequelize.define('KapasitasGudang', {
         defaultValue: DataTypes.NOW,
     },
 }, {
-    tableName: 'kapasitas_gudang',
+    tableName: 'KapasitasGudang',
     timestamps: true,
 });
 

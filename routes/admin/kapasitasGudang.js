@@ -1,11 +1,14 @@
 const express = require('express')
 const router = express.Router()
-const controllers = require('../../controllers/admin/kapasitasGudang')
+const GudangController = require('../../controllers/admin/kapasitasGudang')
 const middleware = require('../../middleware/authentication')
 
-router.post('/kapasitas', middleware.verifyTokenAdmin, controllers.addKapasitasGudang)
-router.post('/kapasitas/incoming',middleware.verifyTokenAdmin, controllers.addIncomingGoods)
-router.put('/kapasitas/outgoing', middleware.verifyTokenAdmin, controllers.removeOutgoingGoods)
-router.get('/kapasitas', middleware.verifyTokenAdmin, controllers.getKapasitasGudang)
+router.post('/add-item', middleware.verifyTokenAdmin, GudangController.tambahkanBarang)
+router.post('/remove-item',middleware.verifyTokenAdmin, GudangController.hapusBarang)
+router.get('/inventory', middleware.verifyTokenAdmin, GudangController.getInventory)
+router.get('/item-in-history', middleware.verifyTokenAdmin, GudangController.getBarangMasukHistory)
+router.get('/item-out-history', middleware.verifyTokenAdmin, GudangController.getBarangKeluarHistory)
+
+
 
 module.exports = router
