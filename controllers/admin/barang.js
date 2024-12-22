@@ -61,14 +61,15 @@ const detailBarang = async (req,res) => {
 const editBarang = async (req,res) => {
     try {
         const {id_barang} = req.params
-        const {nama_barang, status_barang} = req.body
+        const {nama_barang, stok, harga} = req.body
         const findBarang = await modelBarang.findByPk(id_barang)
         if (!findBarang) {
             return res.status(400).json({success: false, message: 'Data barang tidak ditemukan'})
         }
         const editBarang = await modelBarang.update({
             nama_barang: nama_barang || findBarang.nama_barang,
-            status_barang: status_barang || findBarang.status_barang
+            stok: stok || findBarang.stok,
+            harga: harga || findBarang.harga
         }, {
             where:{
                 id_barang: id_barang
@@ -84,4 +85,20 @@ const editBarang = async (req,res) => {
     }    
 }
 
-module.exports = {tambahBarang, allDataBarang, detailBarang, editBarang}
+//hapus data barang
+const hapusBarang = async (req,res) => {
+    try {
+        const {id_barang} = req.params
+        const findBarang = await modelBarang.findByPk(id_barang)
+        if (!findBarang) {
+            return res.status(400).json({success: false, message: 'Data barang tidak ditemukan'})
+        }
+        await modelBarang.destroy({where:{id_barang: id_barang}})
+        return res.status(200).json({success: false, message: 'Data barang berhasil dihapus'})        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({success: false, message: 'Kesalahan server'})
+    }
+}
+
+module.exports = {tambahBarang, allDataBarang, detailBarang, editBarang, hapusBarang}
