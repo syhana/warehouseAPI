@@ -1,5 +1,6 @@
 const {DataTypes} = require('sequelize')
 const sequelize = require('../config/db')
+const Kategori = require('./Kategori/kategori');
 
 const barang = sequelize.define('barang', {
     id_barang:{
@@ -20,6 +21,14 @@ const barang = sequelize.define('barang', {
         type: DataTypes.INTEGER(3),
         allowNull: false
     },
+    id_kategori: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Kategori,
+        key: 'id',
+      },
+      allowNull: false,
+    },
     created_at:{
         type: DataTypes.DATE,
         allowNull: false
@@ -34,6 +43,8 @@ const barang = sequelize.define('barang', {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
 })
+
+barang.belongsTo(Kategori, { foreignKey: 'id_kategori', as: 'kategori' });
 
 sequelize.sync();
 

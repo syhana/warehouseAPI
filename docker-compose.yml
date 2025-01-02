@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  # Service Aplikasi Node.js
+  warehouse-api:
+    build: .
+    container_name: warehouse-app
+    # Pemetaan port Host:Container
+    ports:
+      - "1232:1232"
+    environment:
+      # Supaya Node.js tahu info MySQL
+      DB_HOST: db # <--- Akan menunjuk ke service "db" di bawah
+      DB_PORT: 3306 # port MySQL di dalam container
+      DB_USER: root # contoh user
+      DB_PASS: root # contoh password
+      DB_NAME: warehouse # contoh nama database
+    depends_on:
+      - db # Pastikan service "db" di-start dulu
+    # Optional: jika pakai environment variable lain (JWT, dsb.) masukkan di sini
+
+  # Service Database MySQL
+  db:
+    image: mysql:8
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: warehouse
+    # Pemetaan port Host:Container
+    # Host: 8889 -> Container: 3306
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+# Volume untuk menyimpan data database agar tidak hilang
+volumes:
+  db_data:
